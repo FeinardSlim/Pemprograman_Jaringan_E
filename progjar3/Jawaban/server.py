@@ -23,7 +23,7 @@ class ProcessTheClient(threading.Thread):
         while True:
             try:
                 incoming = self.connection.recv(32)
-                # print(incoming)
+                print(incoming)
                 endcheck = incoming
                 endcheck = endcheck[-3:]
                 if endcheck == b'end' or endcheck == b'':
