@@ -6,7 +6,7 @@ import time
 import sys
 
 
-from file_protocol import FileProtocol
+from file_protocol import  FileProtocol
 fp = FileProtocol()
 
 
@@ -30,7 +30,7 @@ class ProcessTheClient(threading.Thread):
 
 
 class Server(threading.Thread):
-    def __init__(self,ipaddress='127.0.0.1',port=7777):
+    def __init__(self,ipaddress='0.0.0.0',port=8889):
         self.ipinfo=(ipaddress,port)
         self.the_clients = []
         self.my_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -51,10 +51,9 @@ class Server(threading.Thread):
 
 
 def main():
-    svr = Server(ipaddress='127.0.0.1',port=7777)
+    svr = Server(ipaddress='0.0.0.0',port=6666)
     svr.start()
 
 
 if __name__ == "__main__":
     main()
-

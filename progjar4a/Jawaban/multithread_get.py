@@ -4,6 +4,7 @@ import threading
 def download(filename):
     texec = dict()
     for i in range(100):
+        print(f'Downloading File of {i}')
         texec[i] = threading.Thread(target=remote_get, args=(filename,))
         texec[i].start()
     for i in texec:
