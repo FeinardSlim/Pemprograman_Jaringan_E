@@ -3,12 +3,12 @@ import json
 import base64
 import logging
 
-server_address=('0.0.0.0',7777)
+server_address=('127.0.0.1',7777)
 
 def send_command(command_str=""):
     global server_address
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect(server_address)
+    sock.connect(('127.0.0.1',7777))
     logging.warning(f"connecting to {server_address}")
     try:
         logging.warning(f"sending message ")
@@ -49,23 +49,34 @@ def remote_list():
         return False
 
 def remote_get(filename=""):
+    pokijan_counter = 0
+    downloadPerRequest = 100
     command_str=f"GET {filename}"
-    hasil = send_command(command_str)
-    if (hasil['status']=='OK'):
-        #proses file dalam bentuk base64 ke bentuk bytes
-        namafile= hasil['data_namafile']
-        isifile = base64.b64decode(hasil['data_file'])
-        fp = open(namafile,'wb+')
-        fp.write(isifile)
-        fp.close()
-        return True
-    else:
-        print("Gagal")
-        return False
+    while pokijan_counter < downloadPerRequest:
+        print(command_str,pokijan_counter,downloadPerRequest)
+        hasil = send_command(command_str)
+        pokijan_counter += 1
+        if (hasil['status']=='OK'):
+            #proses file dalam bentuk base64 ke bentuk bytes
+            namafile= hasil['data_namafile']
+            namafile = namafile.split(".")
+            namafile_b = namafile[0].strip() + str(pokijan_counter)
+            ext = namafile[1].strip()
+            namafile = namafile_b + "." + ext
+            isifile = base64.b64decode(hasil['data_file'])
+            fp = open(namafile,'wb+')
+            fp.write(isifile)
+            fp.close()
+        else:
+            print("Gagal")
+            return False
+    return True
 
 
 if __name__=='__main__':
-    server_address=('0.0.0.0',6666)
-    remote_list()
+    server_address=('127.0.0.1',7777)
+    # remote_list()
+    # i = 0
+    remote_get('pokijan.jpg')
     #remote_get('donalbebek.jpg')
 
