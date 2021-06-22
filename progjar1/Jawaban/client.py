@@ -46,7 +46,7 @@ for i in PORT:
 
         filename = 'hasil.png'
         with open(filename,'rb') as file:
-            senddata = base64.encode(file.read())
+            senddata = base64.b64encode(file.read())
             print(f'sending data {senddata}')
             amount_expected = len(senddata)
             sock.sendall(senddata)
@@ -58,7 +58,7 @@ for i in PORT:
             while amount_received < amount_expected:
                 data = sock.recv(1024)
                 amount_received += len(data)
-                file.write(base64.decode(data))
+                file.write(base64.b64decode(data))
 
             file.close()
     finally:
