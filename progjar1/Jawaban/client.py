@@ -46,8 +46,6 @@ for i in PORT:
         filename = 'hasil.png'
         file = open(filename,'rb')
         senddata = file.read()
-        command = 'file ' + filename
-        sock.sendall(command.encode())
         amount_expected = len(senddata)
 
         destname = sock.recv(1024)
@@ -55,7 +53,7 @@ for i in PORT:
         sock.sendall(senddata)
 
         amount_received = 0
-        with sock, open(destname,'wb') as file:
+        with sock, open('newfile.png','wb') as file:
             print(f'receiving file data, expected {amount_expected}')
             while amount_received < amount_expected:
                 data = sock.recv(1024)
