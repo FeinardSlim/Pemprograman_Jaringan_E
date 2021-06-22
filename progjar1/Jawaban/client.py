@@ -46,6 +46,7 @@ for i in PORT:
         filename = 'hasil.png'
         with open(filename,'rb') as file:
             senddata = file.read()
+            print(f'sending data {senddata}')
             amount_expected = len(senddata)
             sock.sendall(senddata)
             file.close()
