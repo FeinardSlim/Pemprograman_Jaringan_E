@@ -9,7 +9,7 @@ print(f"starting up on {server_address}")
 sock.bind(server_address)
 # Listen for incoming connections
 sock.listen(1)
-while True:
+while True:  # Send data
     # Wait for a connection
     print("waiting for a connection")
     connection, client_address = sock.accept()
