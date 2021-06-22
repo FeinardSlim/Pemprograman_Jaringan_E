@@ -44,7 +44,6 @@ for i in PORT:
             print(f"{data.decode()}")
 
         filename = 'hasil.png'
-        file =
         with open(filename,'rb') as file:
             senddata = file.read()
             amount_expected = len(senddata)
