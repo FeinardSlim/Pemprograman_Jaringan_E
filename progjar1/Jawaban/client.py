@@ -44,13 +44,12 @@ for i in PORT:
             print(f"{data.decode()}")
 
         filename = 'hasil.png'
-        file = open(filename,'rb')
-        senddata = file.read()
-        amount_expected = len(senddata)
-
-        destname = sock.recv(1024)
-        destname = destname.decode()
-        sock.sendall(senddata)
+        file =
+        with open(filename,'rb') as file:
+            senddata = file.read()
+            amount_expected = len(senddata)
+            sock.sendall(senddata)
+            file.close()
 
         amount_received = 0
         with sock, open('newfile.png','wb') as file:
@@ -59,6 +58,8 @@ for i in PORT:
                 data = sock.recv(1024)
                 amount_received += len(data)
                 file.write(data)
+
+            file.close()
 
     finally:
         print("closing")
