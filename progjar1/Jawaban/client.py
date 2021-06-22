@@ -7,11 +7,11 @@ import os
 from datetime import time
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-PORT = [10000,10002]
+PORT = [5000,5002]
 # Connect the socket to the port where the server is listening
 for i in PORT:
     try:
-        server_address = ('192.168.122.60', i)
+        server_address = ('192.168.100.10', i)
         print(f"connecting to {server_address}")
         sock.connect(server_address)
 
