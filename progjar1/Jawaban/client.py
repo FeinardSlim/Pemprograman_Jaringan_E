@@ -2,6 +2,7 @@
 import sys
 import socket
 import os
+import time
 
 # Create a TCP/IP socket
 from datetime import time
@@ -64,39 +65,4 @@ for i in PORT:
         print("closing")
         sock.close()
 
-
-# import sys
-# import socket
-#
-# # Create a TCP/IP socket
-# sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#
-# # Connect the socket to the port where the server is listening
-# server_address = ('127.0.0.1', 10000)
-# print(f"connecting to {server_address}")
-# sock.connect(server_address)
-#
-# try:
-#     # Send data
-#     filename = "hasil.png"
-#     fname = open(filename,'rb')
-#     img = fname.read()
-#     print(f"sending {filename}")
-#     sock.sendall(img)
-#
-#     # Look for the response
-#     amount_received = 0
-#     amount_expected = len(img)
-#     msg = 'terima' + filename
-#     with sock, open(msg,'wb') as file:
-#         while amount_received < amount_expected:
-#             data = sock.recv(6)
-#             amount_received += len(data)
-#             if not data:
-#                 break
-#             file.write(data)
-#
-# finally:
-#     print(f"received {msg}")
-#     sock.close()
 
