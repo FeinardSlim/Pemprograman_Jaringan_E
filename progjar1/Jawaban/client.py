@@ -3,6 +3,7 @@ import sys
 import socket
 import os
 import time
+import base64
 
 # Create a TCP/IP socket
 from datetime import time
@@ -45,7 +46,7 @@ for i in PORT:
 
         filename = 'hasil.png'
         with open(filename,'rb') as file:
-            senddata = file.read()
+            senddata = base64.encode(file.read())
             print(f'sending data {senddata}')
             amount_expected = len(senddata)
             sock.sendall(senddata)
@@ -57,10 +58,9 @@ for i in PORT:
             while amount_received < amount_expected:
                 data = sock.recv(1024)
                 amount_received += len(data)
-                file.write(data)
+                file.write(base64.decode(data))
 
             file.close()
-
     finally:
         print("closing")
         sock.close()
