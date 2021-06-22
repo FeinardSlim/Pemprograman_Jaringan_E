@@ -11,7 +11,7 @@ PORT = [10000,10002]
 # Connect the socket to the port where the server is listening
 for i in PORT:
     try:
-        server_address = ('92.168.122.60', i)
+        server_address = ('192.168.122.60', i)
         print(f"connecting to {server_address}")
         sock.connect(server_address)
 
